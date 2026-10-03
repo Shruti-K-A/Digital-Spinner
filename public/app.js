@@ -1,1 +1,32 @@
-document.addEventListener('alpine:init',()=>{Alpine.data('spinner',()=>({foods:['Pizza','Tacos','Sushi','Ramen','Burgers'],emojis:['🍕','🌮','🍣','🍜','🍔'],rotation:0,spinning:false,result:'',spin(){if(this.spinning)return;this.spinning=true;this.result='';const pick=Math.floor(Math.random()*this.foods.length);const slice=360/this.foods.length;const target=360*6+(360-(pick*slice+slice/2));this.rotation+=target;setTimeout(()=>{this.result=this.foods[pick];this.spinning=false},3200)}}))})
+document.addEventListener('DOMContentLoaded', () => {
+  const wheel = document.querySelector('#wheel');
+  const button = document.querySelector('#spinButton');
+  const status = document.querySelector('#status');
+  const result = document.querySelector('#result');
+  const foods = ['Pizza','Tacos','Sushi','Ramen','Burgers'];
+  let rotation = 0;
+  let spinning = false;
+
+  button.addEventListener('click', () => {
+    if (spinning) return;
+    spinning = true;
+    button.disabled = true;
+    button.textContent = 'Spinning…';
+    status.textContent = 'Consulting the dinner gods…';
+    result.textContent = '';
+
+    const pick = Math.floor(Math.random() * foods.length);
+    const slice = 360 / foods.length;
+    const target = 360 * 6 + (360 - (pick * slice + slice / 2));
+    rotation += target;
+    wheel.style.transform = 'rotate(' + rotation + 'deg)';
+
+    setTimeout(() => {
+      result.textContent = foods[pick];
+      status.textContent = "Tonight you're having";
+      button.disabled = false;
+      button.textContent = 'SPIN AGAIN';
+      spinning = false;
+    }, 3200);
+  });
+});

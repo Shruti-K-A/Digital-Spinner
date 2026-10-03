@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dinner Spinner</title><link rel="stylesheet" href="/theme.css"><script src="https://cdn.tailwindcss.com"></script><script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script><script defer src="/app.js"></script></head>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dinner Spinner</title><link rel="stylesheet" href="/theme.css"><script src="https://cdn.tailwindcss.com"></script><script defer src="/app.js"></script></head>
 <body>
-<main x-data="spinner()" class="min-h-screen px-5 py-8 sm:px-8">
-<div class="mx-auto max-w-5xl">
+<main class="min-h-screen px-5 py-8 sm:px-8"><div class="mx-auto max-w-5xl">
 <header class="flex items-center justify-between mb-8"><div class="flex items-center gap-3"><span class="text-2xl">🍽️</span><span class="font-bold tracking-tight">Dinner Spinner</span></div><span class="text-sm text-stone-500 hidden sm:block">No more “what should we eat?”</span></header>
 <section class="grid lg:grid-cols-[1fr_1.05fr] gap-10 items-center">
 <div class="lg:pr-8"><p class="text-sm font-bold uppercase tracking-[.18em] text-orange-600 mb-4">Tonight's decision</p><h1 class="font-['Playfair_Display'] text-5xl sm:text-6xl leading-[.98] tracking-tight mb-5">Let the wheel<br><span class="text-orange-600">decide dinner.</span></h1><p class="text-lg text-stone-600 max-w-md leading-7">Five cravings. One spin. Zero group-chat arguments.</p>
-<div class="mt-8 flex flex-wrap gap-2"><template x-for="(food,i) in foods" :key="food"><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm"><span x-text="emojis[i]"></span> <span x-text="food"></span></span></template></div></div>
+<div class="mt-8 flex flex-wrap gap-2"><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm">🍕 Pizza</span><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm">🌮 Tacos</span><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm">🍣 Sushi</span><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm">🍜 Ramen</span><span class="rounded-full border border-stone-200 bg-white/70 px-3 py-1.5 text-sm">🍔 Burgers</span></div></div>
 <div class="flex flex-col items-center">
-<div class="relative w-[min(78vw,430px)] aspect-square">
-<div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 text-3xl drop-shadow-sm">▼</div>
-<div class="absolute inset-0 rounded-full border-[10px] border-stone-900/90 shadow-[0_18px_45px_rgba(40,30,15,.18)] overflow-hidden transition-transform duration-[3200ms] ease-[cubic-bezier(.12,.75,.18,1)]" :style="'transform:rotate('+rotation+'deg)'">
-<svg viewBox="0 0 100 100" class="w-full h-full">
-<g transform="rotate(-90 50 50)"><path d="M50 50 L50 0 A50 50 0 0 1 97.55 34.55 Z" fill="#f06b4f"/><path d="M50 50 L97.55 34.55 A50 50 0 0 1 79.39 90.45 Z" fill="#f5c451"/><path d="M50 50 L79.39 90.45 A50 50 0 0 1 20.61 90.45 Z" fill="#7fc7a6"/><path d="M50 50 L20.61 90.45 A50 50 0 0 1 2.45 34.55 Z" fill="#9c8bd8"/><path d="M50 50 L2.45 34.55 A50 50 0 0 1 50 0 Z" fill="#f4a6a0"/></g>
-<circle cx="50" cy="50" r="12" fill="#fffaf0"/><circle cx="50" cy="50" r="5" fill="#20201d"/>
-<g font-family="DM Sans" font-size="5" font-weight="700" text-anchor="middle" fill="#20201d"><text x="72" y="25" transform="rotate(36 72 25)">🍕</text><text x="78" y="62" transform="rotate(108 78 62)">🌮</text><text x="42" y="82" transform="rotate(180 42 82)">🍣</text><text x="17" y="61" transform="rotate(252 17 61)">🍜</text><text x="29" y="24" transform="rotate(324 29 24)">🍔</text></g></svg></div>
-</div>
-<button @click="spin()" :disabled="spinning" class="mt-8 rounded-full bg-stone-900 px-9 py-4 text-lg font-bold text-white shadow-[0_7px_0_#c64e38] transition hover:-translate-y-0.5 hover:bg-stone-800 active:translate-y-1 active:shadow-[0_3px_0_#c64e38] disabled:cursor-not-allowed disabled:opacity-70" x-text="spinning?'Spinning…':'SPIN FOR DINNER'"></button>
-<div class="mt-6 min-h-[74px] text-center" aria-live="polite"><p x-show="!result && !spinning" class="text-sm text-stone-500">The wheel has spoken… whenever you're ready.</p><p x-show="spinning" class="text-sm font-medium text-stone-500">Consulting the dinner gods…</p><div x-show="result" x-cloak><p class="text-xs font-bold uppercase tracking-[.18em] text-orange-600">Tonight you're having</p><p class="font-['Playfair_Display'] text-4xl mt-1" x-text="result"></p></div></div>
-</div></section>
+<div class="relative w-[min(78vw,430px)] aspect-square"><div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 text-3xl">▼</div>
+<div id="wheel" class="absolute inset-0 rounded-full border-[10px] border-stone-900/90 shadow-[0_18px_45px_rgba(40,30,15,.18)] overflow-hidden transition-transform duration-[3200ms] ease-[cubic-bezier(.12,.75,.18,1)]">
+<svg viewBox="0 0 100 100" class="w-full h-full"><g transform="rotate(-90 50 50)"><path d="M50 50 L50 0 A50 50 0 0 1 97.55 34.55 Z" fill="#f06b4f"/><path d="M50 50 L97.55 34.55 A50 50 0 0 1 79.39 90.45 Z" fill="#f5c451"/><path d="M50 50 L79.39 90.45 A50 50 0 0 1 20.61 90.45 Z" fill="#7fc7a6"/><path d="M50 50 L20.61 90.45 A50 50 0 0 1 2.45 34.55 Z" fill="#9c8bd8"/><path d="M50 50 L2.45 34.55 A50 50 0 0 1 50 0 Z" fill="#f4a6a0"/></g><circle cx="50" cy="50" r="12" fill="#fffaf0"/><circle cx="50" cy="50" r="5" fill="#20201d"/><g font-size="5" text-anchor="middle"><text x="72" y="25">🍕</text><text x="78" y="62">🌮</text><text x="42" y="82">🍣</text><text x="17" y="61">🍜</text><text x="29" y="24">🍔</text></g></svg></div></div>
+<button id="spinButton" class="mt-8 rounded-full bg-stone-900 px-9 py-4 text-lg font-bold text-white shadow-[0_7px_0_#c64e38] transition hover:-translate-y-0.5 hover:bg-stone-800 active:translate-y-1 active:shadow-[0_3px_0_#c64e38]">SPIN FOR DINNER</button>
+<div class="mt-6 min-h-[74px] text-center" aria-live="polite"><p id="status" class="text-sm text-stone-500">The wheel has spoken… whenever you're ready.</p><p id="result" class="font-['Playfair_Display'] text-4xl mt-1"></p></div></div></section>
 <footer class="mt-10 pt-5 border-t border-stone-200 text-center text-sm text-stone-400">Pizza • Tacos • Sushi • Ramen • Burgers</footer>
-</div></main>
-<style>[x-cloak]{display:none!important}</style></body></html>
+</div></main></body></html>
