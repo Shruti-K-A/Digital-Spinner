@@ -1,0 +1,5 @@
+# Hatchable project manifest. This file marks the folder as a
+# Hatchable project and declares the services it uses.
+# Reference: https://hatchable.com/docs/developers/config
+name = "Dinner Spinner"
+description = "A one-page dinner spinner that randomly picks pizza, tacos, sushi, ramen, or burgers."
