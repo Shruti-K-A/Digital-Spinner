@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     svg.appendChild(group);
   }
 
-  updateWheelIcons();
+  // Fixed wheel emoji positions are defined in index.html.
 
   button.addEventListener('click', () => {
     if (spinning) return;
