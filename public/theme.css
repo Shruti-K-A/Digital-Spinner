@@ -1,0 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap');
+:root{--ink:#20201d;--cream:#fffaf0;--coral:#f06b4f;--gold:#f5c451;--mint:#7fc7a6;--lav:#9c8bd8;--line:#ded8c9}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif}
+h1,h2,p{margin:0}button{font:inherit}
