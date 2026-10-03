@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('#spinButton');
   const status = document.querySelector('#status');
   const result = document.querySelector('#result');
-  const foods = ['Pizza','Tacos','Sushi','Ramen','Burgers'];
+  const foods = ['Biryani', 'Dosa', 'Butter Chicken', 'Momos', 'Paneer'];
   let rotation = 0;
   let spinning = false;
 
